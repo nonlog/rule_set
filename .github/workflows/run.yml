@@ -91,10 +91,19 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b master
+          git checkout -b temp-branch
+          git rm -r .github/workflows
+          git commit -m "Remove .github/workflows temporarily"
+          git push -f origin temp-branch:master
+          mkdir -p .github/workflows   # 创建文件夹
+# 将你的工作流文件添加到 .github/workflows 文件夹中
           git add .
-          git commit -m "${{ env.RELEASE_NAME }}"
-          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git commit -m "Restore .github/workflows"
           git push origin master
+          #git add .
+          #git commit -m "${{ env.RELEASE_NAME }}"
+          #git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          #git push origin master
       - name: Purge jsdelivr CDN
         run: |
           cd publish || exit 1
