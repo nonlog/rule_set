@@ -2,13 +2,10 @@ name: Generate RULE-SET files
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*30 22 * * *"
   push:
     branches:
-      - master
       - rules
-    paths-ignore:
-      - "**/README.md"
 jobs:
   build:
     runs-on: ubuntu-latest
