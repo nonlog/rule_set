@@ -94,7 +94,7 @@ jobs:
           git add .
           git commit -m "${{ env.RELEASE_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push origin rules
+          git push -f origin rules
       - name: Purge jsdelivr CDN
         run: |
           cd publish || exit 1
