@@ -3,11 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "*/6 * * * *"
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - "**/README.md"
+
 jobs:
   build:
     runs-on: ubuntu-latest
