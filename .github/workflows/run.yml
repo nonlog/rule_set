@@ -27,11 +27,6 @@ jobs:
           echo "lan_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/private.txt" >> $GITHUB_ENV
         shell: bash
 
-      - name: Checkout the "hidden" branch
-        uses: actions/checkout@v4
-        with:
-          ref: hidden
-
       - name: Generate private.list file
         run: |
           curl -sSL ${custom_private} | awk -F ':' '/^full:/ {printf "DOMAIN,%s\n", $2}' >> private.list
