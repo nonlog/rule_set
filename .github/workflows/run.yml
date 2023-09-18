@@ -3,9 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "30 22 * * *"
-  push:
-    branches:
-      - rules
+    
 jobs:
   build:
     runs-on: ubuntu-latest
