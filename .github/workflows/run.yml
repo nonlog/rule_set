@@ -22,11 +22,6 @@ jobs:
           echo "cn_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/cn.txt" >> $GITHUB_ENV
           echo "lan_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/private.txt" >> $GITHUB_ENV
         shell: bash
-        
-      - name: Checkout the custom rules
-        uses: actions/checkout@v4
-        with:
-          ref: master
           
       - name: Generate private.list file
         run: |
@@ -79,6 +74,12 @@ jobs:
           echo "payload:" > lancidr.yaml
           curl -sSL ${lan_cidr} | perl -ne '/(.+\/\d+)/ && print "  - IP-CIDR,$1\n"' | sed "s/|/'/g" >> lancidr.yaml
           curl -sSL ${lan_cidr} | perl -ne '/(.+\/\d+)/ && print "IP-CIDR,$1\n"' | sed "s/|/'/g" >> lancidr.list
+
+      - name: Checkout the custom rules
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          
       - name: Move files to publish directory
         run: |
           mkdir -p publish/Surfboard publish/Clash
@@ -87,9 +88,6 @@ jobs:
           
       - name: Git push assets to branches
         run: |
-          find . -type f -print
-          working-directory: rules # 指定
-          
           cd publish || exit 1
           git init
           git config --local user.name "github-actions[bot]"
