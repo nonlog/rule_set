@@ -26,7 +26,7 @@ jobs:
       - name: Checkout the custom rules
         uses: actions/checkout@v4
         with:
-          ref: hidden
+          ref: master
           
       - name: Generate private.list file
         run: |
@@ -87,6 +87,9 @@ jobs:
           
       - name: Git push assets to branches
         run: |
+          find . -type f -print
+          working-directory: rules # 指定
+          
           cd publish || exit 1
           git init
           git config --local user.name "github-actions[bot]"
