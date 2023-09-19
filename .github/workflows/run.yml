@@ -28,7 +28,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: master
-          path: rules
           
       - name: Generate private.list file
         run: |
