@@ -6,7 +6,6 @@ on:
   push:
       branches:
         - master
-        - hidden
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,10 +25,11 @@ jobs:
           echo "lan_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/private.txt" >> $GITHUB_ENV
         shell: bash
         
-      - name: Checkout the "hidden" branch
+      - name: Checkout the custom rules
         uses: actions/checkout@v4
         with:
-          ref: hidden
+          ref: master
+          path: rules/
           
       - name: Generate private.list file
         run: |
