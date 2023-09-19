@@ -4,8 +4,6 @@ on:
   schedule:
     - cron: "30 22 * * *"
   push:
-    branches:
-      - hidden
       
 jobs:
   build:
