@@ -2,8 +2,12 @@ name: Generate RULE-SET files
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 22 * * *"
-    
+    - cron: "*/5 * * * *"
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "**/README.md"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,7 +26,12 @@ jobs:
           echo "cn_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/cn.txt" >> $GITHUB_ENV
           echo "lan_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/private.txt" >> $GITHUB_ENV
         shell: bash
-
+        
+      - name: Checkout the "hidden" branch
+        uses: actions/checkout@v4
+        with:
+          ref: hidden
+          
       - name: Generate private.list file
         run: |
           echo "payload:" > private.yaml
