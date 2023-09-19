@@ -2,8 +2,12 @@ name: Generate RULE-SET files
 on:
   workflow_dispatch:
   schedule:
-    - cron: "42 1 * * *"
-    
+    - cron: "55 1 * * *"
+  push:
+    branches:
+      - master
+      - rules  
+      - hidden
 jobs:
   build:
     runs-on: ubuntu-latest
