@@ -27,8 +27,7 @@ jobs:
       - name: Checkout the custom rules
         uses: actions/checkout@v4
         with:
-          ref: master
-          show-progress: true
+          path: rules
           
       - name: Generate private.list file
         run: |
