@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: "30 22 * * *"
   push:
+    branches:
+      - hidden
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,7 +28,7 @@ jobs:
       - name: Checkout the custom rules
         uses: actions/checkout@v4
         with:
-          ref: master
+          ref: hidden
           
       - name: Generate private.list file
         run: |
