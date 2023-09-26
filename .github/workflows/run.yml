@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - master
-      - hidden
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,13 +23,36 @@ jobs:
           echo "Loyalsoldier_greatfire=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt" >> $GITHUB_ENV
           echo "cn_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/cn.txt" >> $GITHUB_ENV
           echo "lan_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/private.txt" >> $GITHUB_ENV
+          echo "fcm=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/FCM.list" >> $GITHUB_ENV
+          echo "custom_d=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/custom_d.list" >> $GITHUB_ENV
+          echo "microsoft=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/microsoft.list" >> $GITHUB_ENV
+          echo "bypass=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/bypass.list" >> $GITHUB_ENV
         shell: bash
 
-      - name: Checkout the custom rules
-        uses: actions/checkout@v4
-        with:
-          ref: hidden
+      - name: Generate FCM file
+        run: |
+          echo "payload:" > FCM.yaml
+          curl -sSL ${fcm} | sed 's/^/  - /' >> FCM.yaml
+          curl -sSL ${fcm} | cat >> FCM.list
+      
+      - name: Generate microsoft file
+        run: |
+          echo "payload:" > microsoft.yaml
+          curl -sSL ${microsoft} | sed 's/^/  - /' >> microsoft.yaml
+          curl -sSL ${microsoft} | cat >> microsoft.list
+      
+      - name: Generate custom_d file
+        run: |
+          echo "payload:" > custom_d.yaml
+          curl -sSL ${custom_d} | sed 's/^/  - /' >> custom_d.yaml
+          curl -sSL ${custom_d} | cat >> custom_d.list
           
+      - name: Generate bypass file
+        run: |
+          echo "payload:" > bypass.yaml
+          curl -sSL ${bypass} | sed 's/^/  - /' >> bypass.yaml
+          curl -sSL ${bypass} | cat >> bypass.list
+      
       - name: Generate private.list file
         run: |
           echo "payload:" > private.yaml
