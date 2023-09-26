@@ -1,0 +1,7 @@
+PROCESS-NAME,com.twitter.android
+DOMAIN,twitter.com
+DOMAIN-SUFFIX,twitter.com
+DOMAIN,x.com
+DOMAIN-SUFFIX,twimg.com
+DOMAIN,translate.google.com
+DOMAIN,translate-pa.googleapis.com
