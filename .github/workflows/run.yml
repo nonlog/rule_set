@@ -27,7 +27,7 @@ jobs:
           echo "custom_d=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/custom_d.list" >> $GITHUB_ENV
           echo "microsoft=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/microsoft.list" >> $GITHUB_ENV
           echo "bypass=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/bypass.list" >> $GITHUB_ENV
-          echo "gone=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/Gone.list" >> $GITHUB_ENV
+          echo "gone=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/gone.list" >> $GITHUB_ENV
         shell: bash
 
       - name: Generate gone file
