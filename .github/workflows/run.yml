@@ -100,7 +100,7 @@ jobs:
         run: |
           echo "payload:" > tld-not-cn.yaml
           curl -sSL "${custom_tld_not_cn}" | perl -ne '/^domain:([-_a-zA-Z0-9]+(\.[-_a-zA-Z0-9]+)*)/ && print "  - |+.$1|\n"' | sed "s/|/'/g" >> tld-not-cn.yaml
-          curl -sSL "${custom_tld_not_cn}" | perl -ne '/^domain:([-_a-zA-Z0-9]+(\.[-_a-zA-Z0-9]+)*)/ && print *.$1\n"' >> tld-not-cn.list
+          curl -sSL "${custom_tld_not_cn}" | perl -ne '/^domain:([-_a-zA-Z0-9]+(\.[-_a-zA-Z0-9]+)*)/ && print "*.$1\n"' >> tld-not-cn.list
       - name: Generate cncidr.list file
         run: |
           echo "payload:" > cncidr.yaml
