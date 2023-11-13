@@ -17,48 +17,14 @@ jobs:
           echo "custom_tld_not_cn=https://raw.githubusercontent.com/Loyalsoldier/domain-list-custom/release/tld-!cn.txt" >> $GITHUB_ENV
           echo "custom_private=https://raw.githubusercontent.com/Loyalsoldier/domain-list-custom/release/private.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_reject=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt" >> $GITHUB_ENV
+          echo "AWAvenue_Adblock=https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Adblock-Rule/main/AWAvenue-Adblock-Rule.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_proxy=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_direct=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_gfw=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_greatfire=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt" >> $GITHUB_ENV
           echo "cn_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/cn.txt" >> $GITHUB_ENV
           echo "lan_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/private.txt" >> $GITHUB_ENV
-          echo "fcm=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/fcm.list" >> $GITHUB_ENV
-          echo "custom_d=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/custom_d.list" >> $GITHUB_ENV
-          echo "microsoft=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/microsoft.list" >> $GITHUB_ENV
-          echo "bypass=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/bypass.list" >> $GITHUB_ENV
-          echo "gone=https://raw.githubusercontent.com/Jadelog/RULE-SET/master/rules/gone.list" >> $GITHUB_ENV
         shell: bash
-
-      - name: Generate gone file
-        run: |
-          echo "payload:" > gone.yaml
-          curl -sSL ${gone} | sed 's/^/  - /' >> gone.yaml
-          curl -sSL ${gone} | cat >> gone.list
-      
-      - name: Generate fcm file
-        run: |
-          echo "payload:" > fcm.yaml
-          curl -sSL ${fcm} | sed 's/^/  - /' >> fcm.yaml
-          curl -sSL ${fcm} | cat >> fcm.list
-      
-      - name: Generate microsoft file
-        run: |
-          echo "payload:" > microsoft.yaml
-          curl -sSL ${microsoft} | sed 's/^/  - /' >> microsoft.yaml
-          curl -sSL ${microsoft} | cat >> microsoft.list
-      
-      - name: Generate custom_d file
-        run: |
-          echo "payload:" > custom_d.yaml
-          curl -sSL ${custom_d} | sed 's/^/  - /' >> custom_d.yaml
-          curl -sSL ${custom_d} | cat >> custom_d.list
-          
-      - name: Generate bypass file
-        run: |
-          echo "payload:" > bypass.yaml
-          curl -sSL ${bypass} | sed 's/^/  - /' >> bypass.yaml
-          curl -sSL ${bypass} | cat >> bypass.list
       
       - name: Generate private.list file
         run: |
