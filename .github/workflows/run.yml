@@ -17,15 +17,20 @@ jobs:
           echo "custom_tld_not_cn=https://raw.githubusercontent.com/Loyalsoldier/domain-list-custom/release/tld-!cn.txt" >> $GITHUB_ENV
           echo "custom_private=https://raw.githubusercontent.com/Loyalsoldier/domain-list-custom/release/private.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_reject=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt" >> $GITHUB_ENV
-          echo "AWAvenue_Adblock=https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Adblock-Rule/main/AWAvenue-Adblock-Rule.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_proxy=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_direct=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_gfw=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt" >> $GITHUB_ENV
           echo "Loyalsoldier_greatfire=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt" >> $GITHUB_ENV
           echo "cn_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/cn.txt" >> $GITHUB_ENV
-          echo "lan_cidr=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/private.txt" >> $GITHUB_ENV
+          echo "CNMaxY=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml" >> $GITHUB_ENV
+          echo "CNMaxL=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax_Domain.list" >> $GITHUB_ENV
         shell: bash
-      
+
+      - name: Generate CNMax file
+        run: |
+          curl -sSL ${CNMaxY} | awk '!/ - \'\+.ooklaserver\.net\'/ && !/\.tw/' >> ChinaMax_Domain.yaml
+          curl -sSL ${CNMaxL} | awk '!/ - \'\.ooklaserver\.net\'/ && !/\.tw/' >> ChinaMax_Domain.list
+
       - name: Generate private.list file
         run: |
           echo "payload:" > private.yaml
@@ -74,11 +79,6 @@ jobs:
           echo "payload:" > cncidr.yaml
           curl -sSL ${cn_cidr} | perl -ne '/(.+\/\d+)/ && print "  - |$1|\n"' | sed "s/|/'/g" >> cncidr.yaml
           curl -sSL ${cn_cidr} | perl -ne '/(.+\/\d+)/ && print "IP-CIDR,$1\n"' | sed "s/|/'/g" >> cncidr.list
-      - name: Generate lancidr.list file
-        run: |
-          echo "payload:" > lancidr.yaml
-          curl -sSL ${lan_cidr} | perl -ne '/(.+\/\d+)/ && print "  - |$1|\n"' | sed "s/|/'/g" >> lancidr.yaml
-          curl -sSL ${lan_cidr} | perl -ne '/(.+\/\d+)/ && print "IP-CIDR,$1\n"' | sed "s/|/'/g" >> lancidr.list
           
       - name: Move files to publish directory
         run: |
