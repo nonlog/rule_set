@@ -28,8 +28,8 @@ jobs:
 
       - name: Generate CNMax file
         run: |
-          curl -sSL ${CNMaxY} | grep -v -e "ooklaserver" -e ".tw" >> ChinaMax_Domain.yaml
-          curl -sSL ${CNMaxL} | grep -v -e "ooklaserver" -e ".tw" >> ChinaMax_Domain.list
+          curl -sSL ${CNMaxY} | grep -v -e "microsoft" -e "ooklaserver" -e ".tw" >> ChinaMax_Domain.yaml
+          curl -sSL ${CNMaxL} | grep -v -e "microsoft" -e "ooklaserver" -e ".tw" >> ChinaMax_Domain.list
 
       - name: Generate private.list file
         run: |
